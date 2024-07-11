@@ -43,10 +43,80 @@ function write() {
 // write()
 
 function read() {
-  // 4.文件读取
+  // 4.文件读取(同步 + 异步)
   fs.readFile('./ws_test.txt', (_,data) => {
-    console.log(data.toString())
     // 值是一个buffer
+    console.log(data.toString())
   }) // (fileName, options, callback(status, data))
+  // const data = fs.readFileSync('./ws_test.txt',)
+
+  // 流式读取 // 64kb/次
+  const rs = fs.createReadStream('./fs_test2.txt')
+  rs.on('data', (chunk) => {
+    // Buffer
+    console.log(chunk.toString())
+  })
+  rs.on('end', ()=> {})
 }
-read()
+// read()
+
+function copyFile() {
+  fs.readFile('./fs_test2.txt', (status,data) => {
+    fs.writeFile('./fs_test.txt', data, {flag: "a"}, (res) => {
+      console.log(res)
+    })
+  })
+
+  // 
+  const rs = fs.createReadStream('./fs_test2.txt')
+  const ws = fs.createWriteStream('./ws_test.txt')
+  rs.on('data', (chunk) => {
+    ws.write(chunk)
+  })
+
+  // re.pipe(ws) 读取流通过管道给写入流
+}
+// copyFile()
+
+// 文件读取和移动fs.rename(异步 + 同步)
+function renameAndMove() {
+  //  1. 重命名
+  // fs.rename('./fs_test.txt', './fs_test_rename.txt', (status) => {
+  //   console.log(status)
+  // })
+
+  // 2.移动
+  fs.rename('./fs_test_rename2.txt', './fold2/fs_test_rename2.txt', (status) => {
+    console.log(status)
+  })
+}
+// renameAndMove()
+
+// 文件删除(异步 + 同步)
+function delFile() {
+  // fs.unlink('./ws_test.txt', status => {})
+    fs.rm('./fs_test2.txt', status => {}) // node > v14.4
+}
+// delFile()
+
+// 文件夹操作
+function foldOpt() {
+  // 创建 (path option callback)
+  // fs.mkdir('./newFold', status => {})
+  // 递归创建
+  // fs.mkdir('./newFold/a/b/c', {recursive: true}, status => {})
+
+  // 文件夹读取
+  fs.readdir('./newFold', (status, files) => {
+    // 文件名数组
+    console.log(files)
+  })
+
+  // 删除文件夹(recursive将被移除，推荐使用fs.rm)
+  fs.rmdir('./newFold/a', {recursive: true}, status => {
+    console.log(status)
+  })
+}
+// foldOpt()
+
+// 
