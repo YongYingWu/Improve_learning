@@ -119,4 +119,17 @@ function foldOpt() {
 }
 // foldOpt()
 
-// 
+// 查看资源信息
+function lookStatus() {
+  fs.stat('./fs_test_rename2.txt', (status, data) => {
+    if (status) {
+      console.log(status)
+    } else {
+      console.log(data)
+      console.log(data.isFile())
+      console.log(data.isDirectory())
+    }
+  })
+}
+// lookStatus()
+console.log(__dirname)
