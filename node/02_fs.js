@@ -74,7 +74,7 @@ function copyFile() {
     ws.write(chunk)
   })
 
-  // re.pipe(ws) 读取流通过管道给写入流
+  // rs.pipe(ws) 读取流通过管道给写入流
 }
 // copyFile()
 
