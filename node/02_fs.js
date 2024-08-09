@@ -33,7 +33,7 @@ function write() {
   
   
   // 3. 流式写入(减少开关文件次数,大文件)
-  // 创建流式通道 (path, options)
+  // 创建流式通道 (path, options){flags: 'a'} 追加写入
   const ws = fs.createWriteStream('./ws_test.txt')
   ws.write('hello world')
   ws.write(' thank')
@@ -47,7 +47,7 @@ function read() {
   fs.readFile('./ws_test.txt', (_,data) => {
     // 值是一个buffer
     console.log(data.toString())
-  }) // (fileName, options, callback(status, data))
+  }) // (fileName, options(如utf-8可指定编码类型，默认buffer), callback(status, data))
   // const data = fs.readFileSync('./ws_test.txt',)
 
   // 流式读取 // 64kb/次

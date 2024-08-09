@@ -1,6 +1,12 @@
 const path = require('path')
 const fs = require('fs')
 console.log(__dirname + '/02_fs.js')
+
+// *************
+// __dirname 获取执行的脚本所在目录
+// path.resolve('.')获取运行脚本时所在的目录
+// *************
+
 // path.resolve 拼接规范的绝对路径
 console.log('resolve', path.resolve(__dirname, '02_fs.js'))
 
