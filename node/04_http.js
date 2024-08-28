@@ -15,7 +15,7 @@ const server = http.createServer((req,res) => {
   // 实例化URL对象（recommend）
   const u = new URL(url,'http://127.0.0.1:8800')
   // new URLSearchParams()
-  console.log(u.pathname,u.searchParams.get('param'))
+  console.log(u.pathname,u.searchParams,u.searchParams.get('param'))
 
   if (u.pathname === '/login') {
     res.end('login')

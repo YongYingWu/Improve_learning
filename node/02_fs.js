@@ -49,6 +49,7 @@ function read() {
     console.log(data.toString())
   }) // (fileName, options(如utf-8可指定编码类型，默认buffer), callback(status, data))
   // const data = fs.readFileSync('./ws_test.txt',)
+  // fs.promises.readFile(fileName, 'utf-8').then(data => {}) // const fs = require('fs/promises')
 
   // 流式读取 // 64kb/次
   const rs = fs.createReadStream('./fs_test2.txt')
@@ -111,6 +112,8 @@ function foldOpt() {
     // 文件名数组
     console.log(files)
   })
+
+  fs.watch('./newFold', { recursive: true }, (eventType, fileName) => {})
 
   // 删除文件夹(recursive将被移除，推荐使用fs.rm)
   fs.rmdir('./newFold/a', {recursive: true}, status => {
