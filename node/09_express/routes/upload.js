@@ -5,6 +5,7 @@ const router = express.Router();
 const store = multer.diskStorage({
     // 指定文件存储目录
     destination: (req, file, cb) => {
+        // 相对于启动路径
         const dir = '../newFold'
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir)
